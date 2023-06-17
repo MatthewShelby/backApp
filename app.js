@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const fetch = require("node-fetch-native"); // Import the fetch library for making HTTP requests
+//const fetch = require("node-fetch-native"); // Import the fetch library for making HTTP requests
 
 const port = process.env.PORT || 3001;
 

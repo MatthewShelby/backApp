@@ -19,11 +19,11 @@ app.get('/als', async (req, res) => {
 
 app.get('/al2', async (req, res) => {
   try {
-    fetch('https://api.1inch.io/v5.0/' + req.query).then((resx) => {
+    await fetch('https://api.1inch.io/v5.0/' + req.query).then((resx) => {
       console.log('als2: ------>')
       console.log(resx)
       return res.status(200).json({
-        status: "seuccess", data: resx
+        status: "success", data: resx
       });
     }).catch((error) => {
       console.log('als2: error ------>')
@@ -45,11 +45,11 @@ app.get('/al2', async (req, res) => {
 
 app.get('/als2', async (req, res) => {
   try {
-    fetch('https://api.1inch.io/v5.0/56/approve/allowance?tokenAddress=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&walletAddress=0x11677b07C9AcA203A9131571a164C3F0d3f31908').then((resx) => {
+    await fetch('https://api.1inch.io/v5.0/56/approve/allowance?tokenAddress=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&walletAddress=0x11677b07C9AcA203A9131571a164C3F0d3f31908').then((resx) => {
       console.log('als2: ------>')
       console.log(resx)
       return res.status(200).json({
-        status: "seuccess", data: resx
+        status: "success", data: resx
       });
     }).catch((error) => {
       console.log('als2: error ------>')

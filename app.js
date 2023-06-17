@@ -11,10 +11,16 @@ app.get('/', function (request, response) {
 });
 
 app.get('/al', async (req, res) => {
-  return fetch('https://api.1inch.io/v5.0/' + req.query)
+  var xx = await fetch('https://api.1inch.io/v5.0/' + req.query)
+  return res.status(200).json({
+    status: "success", data: xx
+  });
 })
 app.get('/als', async (req, res) => {
-  return fetch('https://api.1inch.io/v5.0/56/approve/allowance?tokenAddress=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&walletAddress=0x11677b07C9AcA203A9131571a164C3F0d3f31908')
+  var xx = await fetch('https://api.1inch.io/v5.0/56/approve/allowance?tokenAddress=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&walletAddress=0x11677b07C9AcA203A9131571a164C3F0d3f31908')
+  return res.status(200).json({
+    status: "success", data: xx
+  });
 })
 
 app.get('/al2', async (req, res) => {

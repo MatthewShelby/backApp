@@ -10,7 +10,7 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 app.get('/c', async (req, res) => {
   try {
     const apiResponse = await fetch('https://api.1inch.io/v5.0/56/approve/allowance?tokenAddress=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&walletAddress=0x11677b07C9AcA203A9131571a164C3F0d3f31908')
-    const apiResponseJson = await apiResponse.json()
+    //const apiResponseJson = await apiResponse.json()
 
     console.log(apiResponse);
 
@@ -32,7 +32,7 @@ app.get('/cc', async (req, res) => {
     var walletAddress = req.walletAddress//'0x11677b07C9AcA203A9131571a164C3F0d3f31908'
     var cid = req.cid
     const apiResponse = await fetch('https://api.1inch.io/v5.0/' + cid + '/approve/allowance?tokenAddress=' + tokenAddress + '&walletAddress=' + walletAddress)
-    const apiResponseJson = await apiResponse.json()
+    //const apiResponseJson = await apiResponse.json()
     console.log(apiResponse);
 
     return res.status(200).json({

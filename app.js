@@ -1,61 +1,76 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3001;
+const fetch = require("node-fetch-native"); // Import the fetch library for making HTTP requests
 
-app.get("/", (req, res) => res.type('html').send(html));
+const port = process.env.PORT || 3001;
+var fs = require('fs');
+//app.get("/", (req, res) => res.type('html').send(html));
+app.get('/', function (request, response) {
+  //response.sendFile('C:/VSCode Repos/DEX/Moralisish/dexstarter/backapp/backapp/htmls/index.html');
+  response.status(200).json({ status: 'success' })
+});
+
+app.get('/al', async (req, res) => {
+  return fetch('https://api.1inch.io/v5.0/' + req.query)
+})
+app.get('/als', async (req, res) => {
+  return fetch('https://api.1inch.io/v5.0/56/approve/allowance?tokenAddress=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&walletAddress=0x11677b07C9AcA203A9131571a164C3F0d3f31908')
+})
+
+app.get('/al2', async (req, res) => {
+  try {
+    fetch('https://api.1inch.io/v5.0/' + req.query).then((resx) => {
+      console.log('als2: ------>')
+      console.log(resx)
+      return res.status(200).json({
+        status: "seuccess", data: resx
+      });
+    }).catch((error) => {
+      console.log('als2: error ------>')
+      console.log(error)
+      return res.status(200).json({
+        status: "error", data: error
+      });
+    })
+
+  } catch (error) {
+    console.log('als2: error2 ------>')
+    console.log(error)
+    return res.status(200).json({
+      status: "error2", data: error
+    });
+  }
+})
+
+
+app.get('/als2', async (req, res) => {
+  try {
+    fetch('https://api.1inch.io/v5.0/56/approve/allowance?tokenAddress=0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56&walletAddress=0x11677b07C9AcA203A9131571a164C3F0d3f31908').then((resx) => {
+      console.log('als2: ------>')
+      console.log(resx)
+      return res.status(200).json({
+        status: "seuccess", data: resx
+      });
+    }).catch((error) => {
+      console.log('als2: error ------>')
+      console.log(error)
+      return res.status(200).json({
+        status: "error", data: error
+      });
+    })
+
+  } catch (error) {
+    console.log('als2: error2 ------>')
+    console.log(error)
+    return res.status(200).json({
+      status: "error2", data: error
+    });
+  }
+})
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 server.keepAliveTimeout = 120 * 1000;
 server.headersTimeout = 120 * 1000;
 
-const html = `
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Hello from Render!</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script>
-      setTimeout(() => {
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-          disableForReducedMotion: true
-        });
-      }, 500);
-    </script>
-    <style>
-      @import url("https://p.typekit.net/p.css?s=1&k=vnd5zic&ht=tk&f=39475.39476.39477.39478.39479.39480.39481.39482&a=18673890&app=typekit&e=css");
-      @font-face {
-        font-family: "neo-sans";
-        src: url("https://use.typekit.net/af/00ac0a/00000000000000003b9b2033/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"), url("https://use.typekit.net/af/00ac0a/00000000000000003b9b2033/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"), url("https://use.typekit.net/af/00ac0a/00000000000000003b9b2033/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
-        font-style: normal;
-        font-weight: 700;
-      }
-      html {
-        font-family: neo-sans;
-        font-weight: 700;
-        font-size: calc(62rem / 16);
-      }
-      body {
-        background: white;
-      }
-      section {
-        border-radius: 1em;
-        padding: 1em;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%);
-      }
-    </style>
-  </head>
-  <body>
-    <section>
-      Hello from Render!
-    </section>
-  </body>
-</html>
-`
+

@@ -13,12 +13,15 @@ app.use(function (req, res, next) {
 const port = process.env.PORT || 3001;
 
 
+const affAdd = '0xc8F01FA38D6A53f6D4184e63d15C0c8a322FFa02'
 
-
-app.get("/priceFor/:chain/:payToken/:receiveToken", async (req, res) => {
+app.get("/priceFor/:chain/:payToken/:receiveToken/:value/:slippage", async (req, res) => {
   var SellTokenAddress = f.getTokenAddress(req.params.chain, req.params.payToken)
   var BuyToeknAddress = f.getTokenAddress(req.params.chain, req.params.receiveToken)
-  var url = 'https://bsc.api.0x.org/swap/v1/quote?buyToken=' + BuyToeknAddress + '&sellToken=' + SellTokenAddress + '&sellAmount=20000000000000000'
+  var value = Number(req.params.value)
+  var slp = req.params.slippage || 0.02
+  var url = 'https://bsc.api.0x.org/swap/v1/quote?buyToken=' + BuyToeknAddress + '&sellToken=' + SellTokenAddress + '&sellAmount=' + value + '&slippagePercentage=' + slp
+    + '&feeRecipient=' + affAdd + '&buyTokenPercentageFee=0.01'
   console.log(url)
   https.get(url, (resp) => {
     let data = '';
@@ -36,7 +39,11 @@ app.get("/priceFor/:chain/:payToken/:receiveToken", async (req, res) => {
 })
 
 
-
+app.get("/health", async (req, res) => {
+  return res.status(200).json({
+    status: "success"
+  });
+})
 
 
 

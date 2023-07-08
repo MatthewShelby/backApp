@@ -6,13 +6,15 @@ const cors = require('cors');
 const https = require('https');
 var f = require('./funcs')
 var r = require('./reqs')
+require("dotenv").config();
 
 // Transaction (records) Schema in DB
 const Rec = require("./TX")
+var acceptedUrl = process.env.aurl
 
-//app.use(cors());
+//app.use(cors()); 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://127.0.0.1:8080"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", acceptedUrl);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -258,7 +260,6 @@ app.get("/allrecord", async (req, res) => {
 
 
 // For server
-require("dotenv").config();
 var dburi = process.env.dburi
 
 

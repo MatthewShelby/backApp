@@ -2,6 +2,8 @@ var consts = require('./const')
 
 module.exports = {
       getTokenAddress: function (chainSym, tokenSymbol) {
+            chainSym = chainSym.toUpperCase()
+            tokenSymbol = tokenSymbol.toUpperCase()
             switch (chainSym) {
                   case 'BSC': case 56:
                         try { return consts.BSCTokens.find(t => t.symbol == tokenSymbol).address } catch (error) { console.log('Address is not exist on the Chain...'); return '0x00' }

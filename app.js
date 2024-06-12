@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-
+// Originally connected to the atlas
 const cors = require('cors');
 const https = require('https');
 var f = require('./funcs')
